@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: buildjet-32vcpu-ubuntu-2004-arm
+    runs-on: buildjet-32vcpu-ubuntu-2204-arm
     
     steps:
     - name: Checkout repository
