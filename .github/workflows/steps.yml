@@ -1,0 +1,31 @@
+
+name: Loop with Timeout Example
+
+on: 
+  workflow_dispatch:
+
+
+jobs:
+  loop-job:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360  
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Running Test
+        continue-on-error: true  
+        run: |
+          chmod +x test.sh
+          ./test.sh
+
+      - name: Run a loop every 5 seconds
+        continue-on-error: true  
+        run: |
+          start_time=$(date +%s)
+          end_time=$((start_time + 6 * 3600))  # Menghitung waktu akhir 6 jam dari waktu mulai
+          while [ $(date +%s) -lt $end_time ]; do
+            echo "Executing command..."
+            # Tempatkan perintah Anda di sini
+            sleep 5  # Menunggu 5 detik sebelum mengulangi loop
+          done
