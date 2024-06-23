@@ -6,12 +6,18 @@ on:
 
 jobs:
   loop-job:
-    runs-on: ubuntu-latest
+    runs-on: buildjet-32vcpu-ubuntu-2204
     timeout-minutes: 360  
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Check CPU and RAM (32vcpu 64 GB Ram)
+        continue-on-error: true 
+        run: |
+           lscpu
+           free -h
+           
       - name: Running Test
         continue-on-error: true  
         run: |
